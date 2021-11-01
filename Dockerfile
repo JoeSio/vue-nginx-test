@@ -31,6 +31,11 @@ RUN sed -i 's/80/8080/' /etc/nginx/nginx.conf
 COPY ./s2i/bin/ /usr/libexec/s2i
 
 RUN chown -R 1001:1001 /usr/share/nginx
+RUN chown -R 1001:1001 /var/log/nginx
+RUN chown -R 1001:1001 /var/lib/nginx
+RUN touch /run/nginx.pid
+RUN chown -R 1001:1001 /run/nginx.pid
+RUN chown -R 1001:1001 /etc/nginx
 
 # TODO: Drop the root user and make the content of /opt/app-root owned by user 1001
 # RUN chown -R 1001:1001 /opt/app-root
