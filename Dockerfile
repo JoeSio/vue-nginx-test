@@ -2,7 +2,7 @@
 FROM openshift/base-centos7
 
 # TODO: Put the maintainer name in the image metadata
-# LABEL maintainer="Your Name <your@email.com>"
+LABEL maintainer="joetest"
 
 # TODO: Rename the builder environment variable to inform users about application you provide them
 # ENV BUILDER_VERSION 1.0
@@ -15,8 +15,13 @@ FROM openshift/base-centos7
 
 # TODO: Install required packages here:
 # RUN yum install -y ... && yum clean all -y
-RUN yum install -y rubygems && yum clean all -y
-RUN gem install asdf
+RUN yum install -y epel-release && \
+    yum install -y --setopt=tsflags=nodocs nginx && \
+    yum clean all
+
+
+RUN sed -i 's/80/8080/' /etc/nginx/nginx.conf
+
 
 # TODO (optional): Copy the builder files into /opt/app-root
 # COPY ./<builder_folder>/ /opt/app-root/
@@ -32,7 +37,7 @@ COPY ./s2i/bin/ /usr/libexec/s2i
 USER 1001
 
 # TODO: Set the default port for applications built using this image
-# EXPOSE 8080
+EXPOSE 8080
 
 # TODO: Set the default CMD for the image
-# CMD ["/usr/libexec/s2i/usage"]
+CMD ["/usr/libexec/s2i/usage"]
