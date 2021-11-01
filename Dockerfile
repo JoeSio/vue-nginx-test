@@ -30,6 +30,8 @@ RUN sed -i 's/80/8080/' /etc/nginx/nginx.conf
 # sets io.openshift.s2i.scripts-url label that way, or update that label
 COPY ./s2i/bin/ /usr/libexec/s2i
 
+RUN chown -R 1001:1001 /usr/share/nginx
+
 # TODO: Drop the root user and make the content of /opt/app-root owned by user 1001
 # RUN chown -R 1001:1001 /opt/app-root
 
