@@ -1,5 +1,5 @@
 # vue-nginx-test
-FROM openshift/base-centos7
+FROM docker.io/openshift/base-centos7
 
 # TODO: Put the maintainer name in the image metadata
 LABEL maintainer="joetest"
