@@ -37,6 +37,13 @@ RUN touch /run/nginx.pid
 RUN chown -R 1001:1001 /run/nginx.pid
 RUN chown -R 1001:1001 /etc/nginx
 
+RUN chgrp -R 0 /usr/share/nginx \
+    && chmod -R g=u /usr/share/nginx \
+    && chgrp -R 0 /var/lib/nginx \
+    && chmod -R g=u  /var/lib/nginx \
+    && chgrp -R 0 /var/log/nginx \
+    && chmod -R g=u  /var/log/nginx 
+
 # TODO: Drop the root user and make the content of /opt/app-root owned by user 1001
 # RUN chown -R 1001:1001 /opt/app-root
 
